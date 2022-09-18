@@ -1,52 +1,89 @@
 body {
+  padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@media (min-width: 1200px) {
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl {
+    max-width: 1206px !important;
+  }
 }
+.app-container {
+  .header-container {
+    .btn-login {
+      border-radius: 5px;
+      margin-right: 15px;
+      padding: 0 16px;
+      border: 1px solid #535353;
+      height: 40px;
+    }
+    .btn-signup {
+      height: 40px;
+      border-radius: 5px;
+      padding: 0 16px;
+      background: #303030;
+      color: white;
 
-.App {
-  text-align: center;
-}
+      &:hover {
+        background: black;
+      }
+    }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+    .navbar {
+      z-index: 10;
+      padding-top: 20px;
+      background-color: rgba(0, 0, 0, 0) !important;
+      .nav-link {
+        &.active {
+          color: #00bff0;
+        }
+      }
+    }
+  }
+  .homepage-container {
+    padding: 100px;
+    position: relative;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+    .title-1 {
+      font-size: 50px;
+      font-weight: 600;
+    }
+    .title-2 {
+      font-size: 20px;
+    }
+    .title-3 {
+      button {
+        border-radius: 5px;
+        height: 40px;
+        border-radius: 5px;
+        padding: 0 16px;
+        background: #303030;
+        color: white;
+
+        &:hover {
+          background: black;
+        }
+      }
+    }
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+video {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
 }
