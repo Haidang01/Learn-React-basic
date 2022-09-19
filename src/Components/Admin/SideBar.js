@@ -1,4 +1,5 @@
 import 'react-pro-sidebar/dist/css/styles.css';
+import { Link } from 'react-router-dom';
 import {
     ProSidebar,
     Menu,
@@ -35,7 +36,10 @@ const SideBar = ({ image, collapsed, toggled, handleToggleSidebar }) => {
                             whiteSpace: 'nowrap',
                         }}
                     >
-                        <DiReact size={'3em'} color={'00bfff'} />
+                        <Link to="/">
+                            <DiReact size={'3em'} color={'00bfff'} />
+
+                        </Link>
                         <span>Menu</span>
                     </div>
                 </SidebarHeader>
@@ -47,6 +51,7 @@ const SideBar = ({ image, collapsed, toggled, handleToggleSidebar }) => {
                             suffix={<span className="badge red">Main </span>}
                         >
                             Dashboard
+                            <Link to="/admins" />
                         </MenuItem>
                     </Menu>
                     <Menu iconShape="circle">
@@ -56,9 +61,20 @@ const SideBar = ({ image, collapsed, toggled, handleToggleSidebar }) => {
 
                             title="Features"
                         >
-                            <MenuItem> Quản lý Users</MenuItem>
-                            <MenuItem> Quản lý Bài Quiz</MenuItem>
-                            <MenuItem> Quản lý Câu Hỏi</MenuItem>
+                            <MenuItem>
+                                Quản lý Users
+                                <Link to="/admins/manage-users" />
+                            </MenuItem>
+
+                            <MenuItem>
+                                Quản lý Bài Quiz
+                                <Link to="/" />
+                            </MenuItem>
+
+                            <MenuItem>
+                                Quản lý Câu Hỏi
+                                <Link to="/" />
+                            </MenuItem>
                         </SubMenu>
                     </Menu>
                 </SidebarContent>

@@ -1,3 +1,5 @@
+import ManageUser from "./Components/Admin/Content/ManageUser";
+import Dashboard from "./Components/Admin/Content/DashBoard";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./Components/Home/HomePage";
 import User from "./Components/User/User";
@@ -19,7 +21,11 @@ root.render(
           <Route index element={<HomePage />} />
           <Route path="users" element={<User />} />
         </Route>
-        <Route path="admins" element={<Admin />} />
+
+        <Route path="/admins" element={<Admin />} >
+          <Route index element={<Dashboard />} />
+          <Route path="manage-users" element={<ManageUser />} />
+        </Route>
       </Routes>
     </BrowserRouter>
     {/* <React.StrictMode>

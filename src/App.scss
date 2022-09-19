@@ -32,7 +32,6 @@ body {
       padding: 0 16px;
       background: #303030;
       color: white;
-
       &:hover {
         background: black;
       }
@@ -72,7 +71,7 @@ body {
         padding: 0 16px;
         background: #303030;
         color: white;
-
+        border: none;
         &:hover {
           background: black;
         }
@@ -85,5 +84,4 @@ video {
   position: fixed;
   bottom: 0;
   width: 100vw;
-  height: 100vh;
 }
