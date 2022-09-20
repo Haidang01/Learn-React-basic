@@ -4,24 +4,35 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Outlet } from 'react-router-dom';
 import ModelCreateUser from './ModelCreateUser';
+import { FcPlus } from "react-icons/fc";
 import "./ManageUser.scss";
+import TableUser from './TableUser';
 
 
 const ManageUser = (props) => {
+
+    const [showModelCreateUser, setShowModelCreateUser] = useState(false);
+
     return (
-        <div class="manage-user-container">
-            <div class="title">
+        <div className="manage-user-container">
+            <div className="title">
                 Manage User
             </div>
-            <div class="user-content">
-                <div>
-                    <button>Add news user</button>
+            <div className="user-content">
+                <div className='btn-add-new'>
+                    <button className='btn btn-primary'
+                        onClick={(e) => setShowModelCreateUser(true)} >
+                        <FcPlus /> Add news user
+                    </button>
                 </div>
-                <div>
-                    Table User
+                <div className='table-users-container'>
+                    <TableUser />
                 </div>
 
-                <ModelCreateUser />
+                <ModelCreateUser
+                    show={showModelCreateUser}
+                    setShow={setShowModelCreateUser}
+                />
 
             </div>
         </div>
