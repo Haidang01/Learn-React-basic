@@ -1,9 +1,19 @@
-
+import ReactPaginate from "https://cdn.skypack.dev/react-paginate@7.1.3";
 import Table from 'react-bootstrap/Table';
-import axios from "axios";
+import { useState, useEffect } from "react";
 
-const TableUser = (props) => {
-    const { listUsers } = props;
+const TableUserPaginate = (props) => {
+    const { listUsers, pageCount } = props;
+    // const [pageCount, setPageCount] = useState(0);
+
+    // Invoke when user click to request another page.
+    const handlePageClick = (event) => {
+        console.log(`User requested page number ${event.selected}`);
+        props.fetchListUserWithPaginate(+event.selected + 1)
+        props.setCurrentPage(+event.selected + 1)
+    }
+
+
     return (
         <>
             <Table striped bordered hover>
@@ -20,8 +30,8 @@ const TableUser = (props) => {
                     {listUsers && listUsers.length > 0 &&
                         listUsers.map((item, index) => {
                             return (
-                                <tr key={`table user -${index}`}>
-                                    <td>{index + 1}</td>
+                                <tr key={`table user - ${index}`}>
+                                    <td>{item.id}</td>
                                     <td>{item.username}</td>
                                     <td>{item.email}</td>
                                     <td>{item.role}</td>
@@ -49,7 +59,30 @@ const TableUser = (props) => {
                     }
                 </tbody>
             </Table>
+            <div className="d-flex justify-content-center">
+                <ReactPaginate
+                    nextLabel="next >"
+                    onPageChange={handlePageClick}
+                    pageRangeDisplayed={3}
+                    marginPagesDisplayed={2}
+                    pageCount={pageCount}
+                    previousLabel="< previous"
+                    pageClassName="page-item"
+                    pageLinkClassName="page-link"
+                    previousClassName="page-item"
+                    previousLinkClassName="page-link"
+                    nextClassName="page-item"
+                    nextLinkClassName="page-link"
+                    breakLabel="..."
+                    breakClassName="page-item"
+                    breakLinkClassName="page-link"
+                    containerClassName="pagination"
+                    activeClassName="active"
+                    renderOnZeroPageCount={null}
+                    forcePage={props.currentPage - 1}
+                />
+            </div>
         </>
     )
 }
-export default TableUser;
+export default TableUserPaginate;
