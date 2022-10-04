@@ -1,0 +1,23 @@
+            {
+                
+                    "hompage": {
+                        "title1": "There's a better way to ask",
+                        "title2": "You don't want to make a boring form.And your audience won't answer one.Create a typeform instead—and make everyone happy.",
+                        "title3": {
+                            "login": "Get's started.It's free"
+
+                        }
+                    },
+                    "header":{
+                        "title1":"Hai Dang",
+                        "title2":"Home",
+                        "title3":"User",
+                        "title4":"Admin",
+                        "title5":"Login",
+                        "title6":"Signup",
+                        "title7":"Profile",
+                        "title8":"Logout",
+                        "title9":"Setting"
+                    }
+                
+            }

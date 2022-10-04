@@ -8,6 +8,7 @@ import img from './img/product-sample-big.png'
 import './Signup.scss';
 import { Resgister } from '../../services/apiService'
 import { toast } from 'react-toastify';
+import Language from '../Header/Language';
 const Signup = (props) => {
     const navigate = useNavigate()
     const [email, setEmail] = useState("");
@@ -67,6 +68,7 @@ const Signup = (props) => {
                     <div className='btn-signup'>
                         <button onClick={() => { navigate('/login') }} >Login</button>
                     </div>
+                    <Language />
                 </div>
                 <div className="title col-4 mx-auto">
                     <h2>Sign up</h2>

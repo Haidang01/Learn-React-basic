@@ -5,9 +5,21 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom"; // chuyen trang
-
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../services/apiService';
+import { toast } from 'react-toastify';
+import { doLogOut } from '../../redux/action/userAction';
+import Language from './Language';
+import { useTranslation, Trans } from 'react-i18next';
 
 const Header = () => {
+  const { t } = useTranslation();
+
+  const isAuthenticated = useSelector(state => state.user.isAuthenticated)
+  // console.log(isAuthenticated);
+  const account = useSelector(state => state.user.account)
+  // console.log(account);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleLogin = () => {
@@ -16,27 +28,47 @@ const Header = () => {
   const handleSignup = () => {
     navigate('/signup')
   }
+  const handleLogOut = async () => {
+    let res = await logout("account.email", account.refresh_token);
+    if (res && res.EC === 0) {
+      // CLEAR data redux
+      dispatch(doLogOut())
+      navigate('/login')
+    } else {
+      toast.error(res.EM)
+    }
+  }
   return (
     <Navbar bg="light" expand="lg">
       <Container>
-        <NavLink to="/" className='navbar-brand'>Hai Dang</NavLink>
+        <NavLink to="/" className='navbar-brand'>
+          {t('header.title1')}
+        </NavLink>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <NavLink to="/" className='nav-link'>Home</NavLink>
-            <NavLink to="/users" className='nav-link'>User</NavLink>
-            <NavLink to="/admins" className='nav-link'>Admin</NavLink>
+            <NavLink to="/" className='nav-link'>
+              {t('header.title2')}
+            </NavLink>
+            <NavLink to="/users" className='nav-link'>{t('header.title3')}</NavLink>
+            <NavLink to="/admins" className='nav-link'>{t('header.title4')}</NavLink>
           </Nav>
 
           <Nav>
-            <button className='btn-login' onClick={() => handleLogin()}>Log in</button>
-            <button className='btn-signup' onClick={() => handleSignup()}>Sign up</button>
+            {
+              isAuthenticated === false ?
+                <>
+                  <button className='btn-login' onClick={() => handleLogin()}>{t('header.title5')}</button>
+                  <button className='btn-signup' onClick={() => handleSignup()}>{t('header.title6')}</button>
+                </>
+                :
+                <NavDropdown title={t('header.title9')} id="basic-nav-dropdown">
+                  <NavDropdown.Item >{t('header.title7')}</NavDropdown.Item>
+                  <NavDropdown.Item onClick={() => handleLogOut()}>{t('header.title8')}</NavDropdown.Item>
 
-            {/* <NavDropdown title="Setting" id="basic-nav-dropdown">
-              <NavDropdown.Item >Login</NavDropdown.Item>
-              <NavDropdown.Item >Logout</NavDropdown.Item>
-              <NavDropdown.Item >Profile</NavDropdown.Item>
-            </NavDropdown> */}
+                </NavDropdown>
+            }
+            <Language />
           </Nav>
         </Navbar.Collapse>
       </Container>
