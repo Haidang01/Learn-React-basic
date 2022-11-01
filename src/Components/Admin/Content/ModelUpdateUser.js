@@ -19,6 +19,7 @@ const ModelUpdateUser = (props) => {
     const [image, setImage] = useState("")
     const [role, setRole] = useState("USER")
     const [previewImage, setPreviewImage] = useState("")
+    // console.log(image);
     useEffect(() => {
         // console.log('userEfff', dataUpdate);
         if (!_.isEmpty(dataUpdate)) {

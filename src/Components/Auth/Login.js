@@ -36,6 +36,7 @@ const Login = (props) => {
         //submit apis
         let data = await postLogin(email, password);
         if (data && data.EC === 0) {
+            console.log(data);
             dispatch(doLogin(data))
             toast.success(data.EM);
             setIsLoading(false);

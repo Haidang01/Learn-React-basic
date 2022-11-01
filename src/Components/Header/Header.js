@@ -11,10 +11,12 @@ import { toast } from 'react-toastify';
 import { doLogOut } from '../../redux/action/userAction';
 import Language from './Language';
 import { useTranslation, Trans } from 'react-i18next';
+import ProFile from './Profile';
+import { useState } from 'react';
 
 const Header = () => {
   const { t } = useTranslation();
-
+  const [showProFile, setShowProFile] = useState(false);
   const isAuthenticated = useSelector(state => state.user.isAuthenticated)
   // console.log(isAuthenticated);
   const account = useSelector(state => state.user.account)
@@ -39,40 +41,43 @@ const Header = () => {
     }
   }
   return (
-    <Navbar bg="light" expand="lg">
-      <Container>
-        <NavLink to="/" className='navbar-brand'>
-          {t('header.title1')}
-        </NavLink>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <NavLink to="/" className='nav-link'>
-              {t('header.title2')}
-            </NavLink>
-            <NavLink to="/users" className='nav-link'>{t('header.title3')}</NavLink>
-            <NavLink to="/admins" className='nav-link'>{t('header.title4')}</NavLink>
-          </Nav>
+    <>
+      <Navbar bg="light" expand="lg">
+        <Container>
+          <NavLink to="/" className='navbar-brand'>
+            {t('header.title1')}
+          </NavLink>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <NavLink to="/" className='nav-link'>
+                {t('header.title2')}
+              </NavLink>
+              <NavLink to="/users" className='nav-link'>{t('header.title3')}</NavLink>
+              <NavLink to="/admins" className='nav-link'>{t('header.title4')}</NavLink>
+            </Nav>
 
-          <Nav>
-            {
-              isAuthenticated === false ?
-                <>
-                  <button className='btn-login' onClick={() => handleLogin()}>{t('header.title5')}</button>
-                  <button className='btn-signup' onClick={() => handleSignup()}>{t('header.title6')}</button>
-                </>
-                :
-                <NavDropdown title={t('header.title9')} id="basic-nav-dropdown">
-                  <NavDropdown.Item >{t('header.title7')}</NavDropdown.Item>
-                  <NavDropdown.Item onClick={() => handleLogOut()}>{t('header.title8')}</NavDropdown.Item>
+            <Nav>
+              {
+                isAuthenticated === false ?
+                  <>
+                    <button className='btn-login' onClick={() => handleLogin()}>{t('header.title5')}</button>
+                    <button className='btn-signup' onClick={() => handleSignup()}>{t('header.title6')}</button>
+                  </>
+                  :
+                  <NavDropdown title={t('header.title9')} id="basic-nav-dropdown">
+                    <NavDropdown.Item onClick={() => setShowProFile(true)}>{t('header.title7')}</NavDropdown.Item>
+                    <NavDropdown.Item onClick={() => handleLogOut()}>{t('header.title8')}</NavDropdown.Item>
 
-                </NavDropdown>
-            }
-            <Language />
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+                  </NavDropdown>
+              }
+              <Language />
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+      <ProFile setShowProFile={setShowProFile} showProFile={showProFile} />
+    </>
   );
 }
 

@@ -96,6 +96,12 @@ const logout = (email, refresh_token) => {
         email, refresh_token
     })
 }
+const UpdateProFile = (username, userImage) => {
+    const data = new FormData();
+    data.append('username', username);
+    data.append('userImage', userImage);
+    return axios.post('api/v1/profile', data)
+}
 export {
     DeleteUser,
     postCreateNewUser,
@@ -114,5 +120,6 @@ export {
     postCreateNewQuestionForQuiz,
     postCreateNewAnswerForQuiz,
     postAssignQuiz,
-    logout
+    logout,
+    UpdateProFile
 }
